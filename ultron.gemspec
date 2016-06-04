@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["MinasMazar"]
   spec.email         = ["minasmazar@gmail.com"]
 
-  spec.summary       = %q{Ultron manage DATA stream in __FILE__}
+  spec.summary       = %q{Ultron manage DATA in __FILE__ as YAML }
   spec.description   = ""
   spec.homepage      = ""
 

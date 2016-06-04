@@ -1,8 +1,10 @@
 # Ultron
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ultron`. To experiment with that code, run `bin/console` for an interactive prompt.
+    In a ruby script, there’s a keyword __END__ that for a long time I thought just marked anything after it as a comment. So I used to use it to store snippets and notes about the script that weren’t really needed inline. Then one day I stumbled across the DATA constant, and wondered what flaming magic it was.
 
-TODO: Delete this and the text above, and describe your gem
+Taken from [http://caiustheory.com/why-i-love-data/](http://caiustheory.com/why-i-love-data/)
+
+*Ultron* helps to retrieve this data and update them. It's assumed the data are in [ *YAML* ](http://yaml.org/) format.
 
 ## Installation
 
@@ -22,8 +24,59 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Simple script
 
+```ruby
+require 'ultron'
+
+# Get youtube urls in YAML format
+vids = __ultron_data
+
+# Do some stuff with data..
+vids.each do |v|
+  v[:title] ||= `youtube-dl -s --get-title #{v[:url]}`
+end
+
+# Now save data
+__ultron_update
+
+__END__
+---
+- :url: http://www.youtube.com/watch?v=umCVFVANdfs
+- :url: http://www.youtube.com/watch?v=Se90eQhC7D0
+- :url: http://www.youtube.com/watch?v=Zz-6BgsmYe4
+- :url: http://www.youtube.com/watch?v=fJQHV3AT03w
+```
+
+At the end of this script the video should have titles
+
+```ruby
+require 'ultron'
+
+# Get youtube urls in YAML format
+vids = __ultron_data
+
+# Do some stuff with data..
+vids.each do |v|
+  v[:title] ||= `youtube-dl -s --get-title #{v[:url]}`
+end
+
+# Now save data
+__ultron_update
+
+__END__
+---
+- :url: http://www.youtube.com/watch?v=umCVFVANdfs
+  :title: |
+    Brocken Moon - Mondfinsternis (Full Album)
+- :url: http://www.youtube.com/watch?v=Se90eQhC7D0
+  :title: |
+    Cultes Des Ghoules - Henbane (2013) [Full Album]
+- :url: http://www.youtube.com/watch?v=Zz-6BgsmYe4
+  :title: |
+    Abbath- Abbath (Full Album 2016) HD
+
+```
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
