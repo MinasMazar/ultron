@@ -14,7 +14,6 @@ module Ultron
       f.seek 0, File::SEEK_END
       f.write "\n__END__\n"
       @__ultron_data_pos = f.pos
-      @__ultron_data = []
       f.flush
       f.close
     else
