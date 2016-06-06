@@ -5,6 +5,9 @@ module Ultron
   def __ultron_data
     @__ultron_data
   end
+  def __ultron_data=(data)
+    @__ultron_data = data
+  end
   def __ultron_init
     unless defined? DATA
       f = File.new $0, "r+"
@@ -26,6 +29,7 @@ module Ultron
     file.write data
     file.close
   end
+  alias :__ultron_save :__ultron_update
 end
 
 include Ultron
