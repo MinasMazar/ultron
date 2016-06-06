@@ -29,5 +29,4 @@ module Ultron
 end
 
 include Ultron
-__ultron_init
 
